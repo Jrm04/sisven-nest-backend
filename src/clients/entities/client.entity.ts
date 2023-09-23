@@ -16,5 +16,4 @@ export class Client {
 
     @Column("varchar") email: string;
 
-    
 }
