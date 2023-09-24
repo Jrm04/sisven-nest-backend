@@ -3,8 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ClientsModule } from './clients/clients.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
 import { Client } from './clients/entities/client.entity';
+import { CategoriesModule } from './categories/categories.module';
+import { Category } from './categories/entities/category.entity';
 
 @Module({
   imports: [ClientsModule,
@@ -15,9 +16,10 @@ import { Client } from './clients/entities/client.entity';
       username: 'root',
       password: '',
       database: 'sisven',
-      entities: [Client],
+      entities: [Client, Category],
       synchronize: true,
-    })],
+    }),
+    CategoriesModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -32,7 +32,6 @@ export class ClientsService {
     updateClient.phone_number = updateClientDto.phone_number;
     updateClient.email = updateClientDto.email;
     
-
     return await this.clientsRepository.save(updateClient);
   }
 
