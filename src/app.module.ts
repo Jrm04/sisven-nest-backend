@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Client } from './clients/entities/client.entity';
 import { CategoriesModule } from './categories/categories.module';
 import { Category } from './categories/entities/category.entity';
+import { PayMethodsModule } from './pay_methods/pay_methods.module';
 
 @Module({
   imports: [ClientsModule,
@@ -19,7 +20,8 @@ import { Category } from './categories/entities/category.entity';
       entities: [Client, Category],
       synchronize: true,
     }),
-    CategoriesModule],
+    CategoriesModule,
+    PayMethodsModule],
   controllers: [AppController],
   providers: [AppService],
 })
