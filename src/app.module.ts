@@ -7,6 +7,8 @@ import { Client } from './clients/entities/client.entity';
 import { CategoriesModule } from './categories/categories.module';
 import { Category } from './categories/entities/category.entity';
 import { PayMethodsModule } from './pay_methods/pay_methods.module';
+import { ProductsModule } from './products/products.module';
+import { Product } from './products/entities/product.entity';
 
 @Module({
   imports: [ClientsModule,
@@ -17,11 +19,12 @@ import { PayMethodsModule } from './pay_methods/pay_methods.module';
       username: 'root',
       password: '',
       database: 'sisven',
-      entities: [Client, Category],
+      entities: [Client, Category, Product],
       synchronize: true,
     }),
     CategoriesModule,
-    PayMethodsModule],
+    PayMethodsModule,
+    ProductsModule],
   controllers: [AppController],
   providers: [AppService],
 })

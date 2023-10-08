@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class Client {
@@ -15,5 +15,7 @@ export class Client {
     @Column("varchar", { length: 10 }) phone_number: string;
 
     @Column("varchar") email: string;
+
+    @CreateDateColumn() timestamps: Date;
 
 }
