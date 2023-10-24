@@ -21,18 +21,29 @@ export class ProductsService {
       product.category = category;
 
       await this.productRepository.save(product);
-      return product;
+      return product; 
     }
 
     throw new NotFoundException (`This Category ID: ${id} Don't Exist`);
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll(): Promise<Product[]> {
+    return await this.productRepository.find({ relations: ['category'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number):Promise<Product | null> {
+    const product = await this.productRepository.findOne({
+      where: {
+        id
+      },
+      relations: ['category']
+    });
+
+    if (!product) {
+      throw new NotFoundException (`This Product ID: ${id} Don't Exist`);
+    }else {
+      return product;
+    }
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
