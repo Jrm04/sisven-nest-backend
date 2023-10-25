@@ -32,12 +32,7 @@ export class ProductsService {
   }
 
   async findOne(id: number):Promise<Product | null> {
-    const product = await this.productRepository.findOne({
-      where: {
-        id
-      },
-      relations: ['category']
-    });
+    const product = await this.productRepository.findOne({where: {id}, relations: ['category']});
 
     if (!product) {
       throw new NotFoundException (`This Product ID: ${id} Don't Exist`);
@@ -46,8 +41,26 @@ export class ProductsService {
     }
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: number, updateProductDto: UpdateProductDto,  updateCategory: number): Promise<Product> {
+    const updateProduct = await this.productRepository.findOne({where: {id}, relations: ['category']});
+
+    if (!updateProduct) {
+      throw new NotFoundException (`This Product ID: ${id} Don't Exist`);
+    }
+
+    updateProduct.name = updateProductDto.name;
+    updateProduct.price = updateProductDto.price;
+    updateProduct.stock = updateProductDto.stock;
+    
+    const category = await this.categoriesRepository.findOne({where: {id: updateCategory}}); //se busca el atributo ID dentro de la tabla category que sea igual a updateCategory que es el valor actualizado
+
+    updateProduct.category = category;
+
+    if (!category) {
+      throw new NotFoundException (`This category ID: ${updateCategory} Don't Exist`);
+    }
+
+    return await this.productRepository.save(updateProduct);
   }
 
   remove(id: number) {

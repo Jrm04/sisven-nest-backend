@@ -23,8 +23,8 @@ export class ProductsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(+id, updateProductDto);
+  update(@Param('id') id: number, @Body('categoryId') updateCategory: number, @Body() updateProductDto: UpdateProductDto) { //se añade un parametro en que se va a guardar el nuevo valor para el ID de category
+    return this.productsService.update(+id, updateProductDto, updateCategory);
   }
 
   @Delete(':id')
