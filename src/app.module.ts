@@ -9,6 +9,9 @@ import { Category } from './categories/entities/category.entity';
 import { PayMethodsModule } from './pay_methods/pay_methods.module';
 import { ProductsModule } from './products/products.module';
 import { Product } from './products/entities/product.entity';
+import { InvoicesModule } from './invoices/invoices.module';
+import { Invoice } from './invoices/entities/invoice.entity';
+import { PayMethod } from './pay_methods/entities/pay_method.entity';
 
 @Module({
   imports: [ClientsModule,
@@ -19,12 +22,13 @@ import { Product } from './products/entities/product.entity';
       username: 'root',
       password: '',
       database: 'sisven',
-      entities: [Client, Category, Product],
+      entities: [Client, Category, Product, Invoice, PayMethod],
       synchronize: true,
     }),
     CategoriesModule,
     PayMethodsModule,
-    ProductsModule],
+    ProductsModule,
+    InvoicesModule],
   controllers: [AppController],
   providers: [AppService],
 })

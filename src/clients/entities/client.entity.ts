@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import { Invoice } from 'src/invoices/entities/invoice.entity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Client {
@@ -17,5 +18,7 @@ export class Client {
     @Column("varchar") email: string;
 
     @CreateDateColumn() timestamps: Date;
+
+    @OneToMany(() => Invoice, (invoice) => invoice.client) invoices: Invoice[];
 
 }
