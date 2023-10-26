@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { InvoicesService } from './invoices.service';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { UpdateInvoiceDto } from './dto/update-invoice.dto';
@@ -8,8 +8,8 @@ export class InvoicesController {
   constructor(private readonly invoicesService: InvoicesService) {}
 
   @Post()
-  create(@Body() createInvoiceDto: CreateInvoiceDto) {
-    return this.invoicesService.create(createInvoiceDto);
+  create(@Param('clientId', ParseIntPipe) clientId: number, @Param('payMethodId', ParseIntPipe) payMethodId: number, @Body() createInvoiceDto: CreateInvoiceDto) {
+    return this.invoicesService.create(clientId, payMethodId, createInvoiceDto);
   }
 
   @Get()
