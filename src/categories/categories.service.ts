@@ -46,7 +46,7 @@ export class CategoriesService {
     const category = await this.categoriesRepository.findOneBy({id});
     
     if (!category) {
-      throw new NotFoundException("This Category Don't Exist");
+      throw new NotFoundException(`This Category ID: ${id} Don't Exist`);
     }
 
     await this.categoriesRepository.remove(category);
