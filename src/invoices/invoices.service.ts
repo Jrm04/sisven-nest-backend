@@ -6,6 +6,7 @@ import { Invoice } from './entities/invoice.entity';
 import { Repository } from 'typeorm';
 import { Client } from 'src/clients/entities/client.entity';
 import { PayMethod } from 'src/pay_methods/entities/pay_method.entity';
+import { InvoicesModule } from './invoices.module';
 
 @Injectable()
 export class InvoicesService {
@@ -34,6 +35,14 @@ export class InvoicesService {
       throw new NotFoundException (`This Pay Method ID: ${PayMethodId} Don't Exist`);
       
     }
+
+    /* const invoice = new Invoice();
+
+    invoice.client = { id: clientId } as any;
+    invoice.pay_method = { id: PayMethodId } as any;
+
+    return await this.invoicesRepository.save(invoice);
+     */
   }
 
   findAll() {

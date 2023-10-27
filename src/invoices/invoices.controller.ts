@@ -8,7 +8,7 @@ export class InvoicesController {
   constructor(private readonly invoicesService: InvoicesService) {}
 
   @Post()
-  create(@Param('clientId', ParseIntPipe) clientId: number, @Param('payMethodId', ParseIntPipe) payMethodId: number, @Body() createInvoiceDto: CreateInvoiceDto) {
+  create(@Body('clientId', ParseIntPipe) clientId: number, @Body('payMethodId', ParseIntPipe) payMethodId: number, @Body() createInvoiceDto: CreateInvoiceDto) {
     return this.invoicesService.create(clientId, payMethodId, createInvoiceDto);
   }
 
