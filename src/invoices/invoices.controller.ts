@@ -18,13 +18,13 @@ export class InvoicesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.invoicesService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInvoiceDto: UpdateInvoiceDto) {
-    return this.invoicesService.update(+id, updateInvoiceDto);
+  update(@Param('id') id: number, @Body('clientId', ParseIntPipe) clientId: number, @Body('payMethodId', ParseIntPipe) payMethodId: number, @Body() updateInvoiceDto: UpdateInvoiceDto) {
+    return this.invoicesService.update(+id, clientId, payMethodId, updateInvoiceDto);
   }
 
   @Delete(':id')
